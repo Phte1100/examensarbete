@@ -1,0 +1,137 @@
+@import './fonts';
+
+body {
+    color: black;
+}
+
+/* Header */
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 40px;
+}
+
+.logo {
+    background: linear-gradient(144deg, #AF40FF, #5B42F3 50%, #00DDEB);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 3em;
+    font-weight: bold;
+    text-decoration: none;
+  }
+  
+
+
+/* knapp */
+.button-64 {
+  align-items: center;
+  background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
+  border: 0;
+  border-radius: 8px;
+  box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+  box-sizing: border-box;
+  color: black;
+  display: flex;
+  font-family: Phantomsans, sans-serif;
+  font-size: 20px;
+  justify-content: center;
+  line-height: 1em;
+  max-width: 100%;
+  min-width: 140px;
+  padding: 3px;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.button-64:active,
+.button-64:hover {
+  outline: 0;
+  color: white;
+}
+
+.button-64 span {
+  background-color: white;
+  padding: 16px 24px;
+  border-radius: 6px;
+  width: 100%;
+  height: 100%;
+  transition: 300ms;
+}
+
+.button-64:hover span {
+  background: none;
+}
+
+@media (min-width: 768px) {
+  .button-64 {
+    font-size: 24px;
+    min-width: 196px;
+  }
+}
+
+.reglink {
+    color: black;
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/*Formulär, inlogg*/
+
+$gradient-border: linear-gradient(144deg, #AF40FF, #5B42F3 50%, #00DDEB);
+
+.login-form {
+  max-width: 400px;
+  margin: 3rem auto;
+
+  h2 {
+    text-align: center;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.25rem;
+
+    label {
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: #555;
+    }
+
+    input {
+      padding: 0.5rem 0.75rem;
+      border: 2px solid transparent;
+      border-radius: 8px;
+      background:
+        linear-gradient(#fff, #fff) padding-box,
+        $gradient-border border-box;
+      outline: none;
+      font-size: 1rem;
+      transition: box-shadow 0.2s ease;
+
+      &:focus {
+        box-shadow: 0 0 0 3px rgba(175, 64, 255, 0.2);
+      }
+    }
+  }
+}
+/*Logo*/
+
+.logo {
+    font-size: 50px;
+    font-family: 'Bagoss Standard';
+    text-align: center;
+  }
+

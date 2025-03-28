@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'Bagoss Standard';
+    src: local('Bagoss Standard Medium'), local('Bagoss-Standard-Medium'),
+        url('@/assets/fonts/BagossStandardTRIAL-Medium.woff2') format('woff2'),
+        url('@/assets/fonts/BagossStandardTRIAL-Medium.woff') format('woff'),
+        url('@/assets/fonts/BagossStandardTRIAL-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+  }
