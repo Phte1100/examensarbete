@@ -73,3 +73,8 @@ bun run preview
 ```
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+
+
+SUPABASE_URL=https://gdfdjnnsdmhfobbuawgb.supabase.co
+SUPABASE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdkZmRqbm5zZG1oZm9iYnVhd2diIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDMzOTkwNDEsImV4cCI6MjA1ODk3NTA0MX0.PJUsGeT1EbA-oCIrPF-mynhVgECzVsCK_bxjEUz6TiA
+NEWS_API_KEY=ff98d142bb8949c6b5d3350e8babd8fa
