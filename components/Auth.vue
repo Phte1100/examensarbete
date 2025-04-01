@@ -7,8 +7,14 @@ const email = ref('')
 const handleLogin = async () => {
   try {
     loading.value = true
-    const { error } = await supabase.auth.signInWithOtp({ email: email.value })
-    if (error) throw error
+    const { error } = await supabase.auth.signInWithOtp({
+  email: email.value,
+  options: {
+    shouldCreateUser: true,
+    emailRedirectTo: 'http://localhost:3000/confirm' // eller produktions-URL
+  }
+})
+
     alert('Check your email for the login link!')
   } catch (error) {
     alert(error.error_description || error.message)

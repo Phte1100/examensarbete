@@ -3,6 +3,12 @@
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
+  supabase: {
+    redirectOptions: {
+      login: '/login',
+      callback: '/confirm', // dit magic linken går
+    }
+  },
   modules: ['@nuxtjs/supabase'],
   css: [
     '@/assets/css/main.scss',
