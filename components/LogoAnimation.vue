@@ -17,13 +17,13 @@
     setInterval(() => {
       index = (index + 1) % texts.length
       currentText.value = texts[index]
-    }, 1500)
+    }, 3000)
   })
   </script>
   
   <style scoped>
 .drop-enter-active, .drop-leave-active {
-  transition: opacity 0.4s ease, transform 0.4s ease;
+  transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
 .drop-enter-from {

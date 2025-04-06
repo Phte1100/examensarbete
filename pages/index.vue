@@ -1,12 +1,17 @@
 <template>
-    <div class="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-        <h1 class="text-4xl font-bold text-blue-600 mb-4">Welcome to My Nuxt 3 App</h1>
-        <p class="text-lg text-gray-700">This is a simple example of a Nuxt 3 application.</p>
-        <button class="button-64" type="submit" @click="handleClick">Hämta artiklar</button>
-        <NewsList />
-        <StackOverflowSearch />
+  <div class="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-blue-50 to-white p-6">
+    <h1 class="text-4xl font-extrabold text-blue-700 mb-2 text-center">🎉 Welcome to Learnit</h1>
+    <p class="text-lg text-gray-600 mb-6 text-center max-w-xl">
+      Upptäck tech-nyheter & Stack Overflow-svar med en Nuxt 3-app!
+    </p>
+    <button class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow mb-6" @click="handleClick">
+      🔄 Hämta artiklar
+    </button>
+    <NewsList />
+    <div class="mt-10 w-full max-w-2xl">
+      <StackOverflowSearch />
     </div>
-    <Marquee />
+  </div>
 </template>
 
 <script setup>

@@ -6,6 +6,6 @@ const user = useSupabaseUser()
 <template>
     
     <LogoAnimation />
-    <LoginForm />
+    <Auth />
 
 </template>

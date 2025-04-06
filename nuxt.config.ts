@@ -9,7 +9,7 @@ export default defineNuxtConfig({
       callback: '/confirm', // dit magic linken går
     }
   },
-  modules: ['@nuxtjs/supabase'],
+  modules: ['@nuxtjs/supabase', '@nuxtjs/tailwindcss'],
   css: [
     '@/assets/css/main.scss',
     '@/assets/css/form.scss'

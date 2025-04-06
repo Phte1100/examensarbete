@@ -1,38 +1,73 @@
 <template>
-    <div v-if="articles.length" class="mt-8 space-y-6">
-      <div
-        v-for="article in articles"
-        :key="article.id"
-        class="bg-white shadow p-4 rounded-lg max-w-xl w-full"
-      >
-        <h2 class="text-xl font-semibold text-gray-800">{{ article.title }}</h2>
-        <p class="text-sm text-gray-600">
-          {{ article.author }} – {{ article.published_at?.substring(0, 10) }}
-        </p>
-        <p class="mt-2 text-gray-700">{{ article.description }}</p>
+  <div v-if="articles.length" class="mt-8 space-y-6">
+    <div
+      v-for="article in articles"
+      :key="article.id"
+      class="bg-white border border-gray-200 hover:shadow-lg transition-shadow rounded-lg p-5"
+    >
+      <h2 class="text-xl font-bold text-gray-800 mb-1">{{ article.title }}</h2>
+      <p class="text-sm text-gray-500 mb-2">
+        {{ article.author || 'Okänd' }} – {{ article.published_at?.substring(0, 10) }}
+      </p>
+      <p class="text-gray-700 mb-2">{{ article.description }}</p>
+
+      <div class="flex items-center space-x-4">
+        <button
+          class="text-sm text-red-600 hover:underline"
+          @click="toggleLike(article.id)"
+        >
+          ❤️ Gilla
+        </button>
         <a
           :href="article.url"
           target="_blank"
-          class="text-blue-500 hover:underline mt-2 inline-block"
-        >Läs mer</a>
+          class="text-blue-600 hover:underline font-medium"
+        >
+          Läs mer
+        </a>
       </div>
     </div>
-  </template>
-  
-  <script setup>
-  import { onMounted, ref } from 'vue'
-  
-  const articles = ref([])
-  
-  const fetchArticles = async () => {
-    try {
-      const res = await $fetch('/api/news/list')
-      articles.value = res.data
-    } catch (err) {
-      console.error('Kunde inte hämta artiklar:', err)
-    }
+  </div>
+</template>
+
+<script setup>
+import { onMounted, ref } from 'vue'
+import { useSupabaseClient, useSupabaseUser } from '#imports'
+
+const articles = ref([])
+const supabase = useSupabaseClient()
+const user = useSupabaseUser()
+
+const fetchArticles = async () => {
+  try {
+    const res = await $fetch('/api/news/list')
+    articles.value = res.data
+  } catch (err) {
+    console.error('Kunde inte hämta artiklar:', err)
   }
-  
-  onMounted(fetchArticles)
-  </script>
-  
+}
+
+const toggleLike = async (newsId) => {
+  if (!user.value) {
+    alert("Du måste vara inloggad för att gilla.")
+    return
+  }
+
+  try {
+    const res = await $fetch('/api/likes/toggle', {
+  method: 'POST',
+  body: { newsId },
+  headers: {
+    authorization: `Bearer ${user.value?.access_token}`
+  }
+})
+
+    console.log(res.liked ? 'Gillad!' : 'Like borttagen!')
+  } catch (err) {
+    console.error('Fel vid toggling av like:', err)
+  }
+}
+
+
+onMounted(fetchArticles)
+</script>
