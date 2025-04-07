@@ -20,7 +20,7 @@ export default defineEventHandler(async () => {
     )
 
     const apiKey = process.env.NEWS_API_KEY
-    const response = await fetch(`https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=${apiKey}`)
+    const response = await fetch(`https://newsapi.org/v2/top-headlines?sources=the-verge,techcrunch,wired,ars-technica,engadget,recode,hacker-news,techradar,the-next-web,mashable,cnet,venture-beat&apiKey=${apiKey}`)
 
     const result = await response.json()
 
@@ -31,7 +31,7 @@ export default defineEventHandler(async () => {
       throw new Error('Failed to fetch news from NewsAPI')
     }
 
-    const articlesToInsert = result.articles.slice(0, 2).map((article: any) => ({
+    const articlesToInsert = result.articles.slice(0-10).map((article: any) => ({
       source_id: article.source?.id ?? null,
       source_name: article.source?.name ?? null,
       author: article.author ?? null,

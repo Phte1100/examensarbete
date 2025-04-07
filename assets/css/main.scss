@@ -14,10 +14,11 @@ body {
 }
 
 .logo {
-    background: linear-gradient(144deg, #AF40FF, #5B42F3 50%, #00DDEB);
+    /*background: linear-gradient(144deg, #AF40FF, #5B42F3 50%, #00DDEB);
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-size: 3em;
+    -webkit-text-fill-color: transparent;*/
+    color: white;
+    font-size: 40px;
     font-weight: bold;
     text-decoration: none;
   }
@@ -130,7 +131,6 @@ $gradient-border: linear-gradient(144deg, #AF40FF, #5B42F3 50%, #00DDEB);
 /*Logo*/
 
 .logo {
-    font-size: 50px;
     font-family: 'Bagoss Standard';
     text-align: center;
   }
