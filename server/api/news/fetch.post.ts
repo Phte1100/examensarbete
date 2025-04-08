@@ -31,7 +31,7 @@ export default defineEventHandler(async () => {
       throw new Error('Failed to fetch news from NewsAPI')
     }
 
-    const articlesToInsert = result.articles.slice(0-10).map((article: any) => ({
+    const articlesToInsert = result.articles.map((article: any) => ({
       source_id: article.source?.id ?? null,
       source_name: article.source?.name ?? null,
       author: article.author ?? null,

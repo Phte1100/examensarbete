@@ -3,13 +3,13 @@
 
   <intro />
 
-
   <div class="flex flex-col items-center justify-center min-h-screen p-6">
     <button class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow mb-6" @click="handleClick">
       🔄 Hämta artiklar
     </button>
    
     <div class="mt-6 space-y-12 lg:grid lg:grid-cols-2 lg:gap-x-6 lg:space-y-0" style="max-width: 1200px;">
+
     
       <StackOverflowSearch />
       <NewsList />

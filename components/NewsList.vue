@@ -1,13 +1,16 @@
 <template>
+
+
+
   <div v-if="articles.length" class="mt-8 space-y-6">
     <div
       v-for="article in articles"
       :key="article.id"
-      class="bg-white border border-gray-200 hover:shadow-lg transition-shadow rounded-lg p-5"
+      class="bg-[#efebfb] border border-gray-200 hover:shadow-lg transition-shadow rounded-3xl p-5"
     >
       <h2 class="text-xl font-bold text-gray-800 mb-1">{{ article.title }}</h2>
       <p class="text-sm text-gray-500 mb-2">
-        {{ article.author || 'Okänd' }} – {{ article.published_at?.substring(0, 10) }}
+        {{ article.author || 'Okänd' }} – {{ article.published_at?.substring(0, 20) }}
       </p>
       <p class="text-gray-700 mb-2">{{ article.description }}</p>
 
