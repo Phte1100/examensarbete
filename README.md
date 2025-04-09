@@ -78,3 +78,33 @@ Check out the [deployment documentation](https://nuxt.com/docs/getting-started/d
 SUPABASE_URL=https://gdfdjnnsdmhfobbuawgb.supabase.co
 SUPABASE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdkZmRqbm5zZG1oZm9iYnVhd2diIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDMzOTkwNDEsImV4cCI6MjA1ODk3NTA0MX0.PJUsGeT1EbA-oCIrPF-mynhVgECzVsCK_bxjEUz6TiA
 NEWS_API_KEY=ff98d142bb8949c6b5d3350e8babd8fa
+
+
+Supabase token för edge funktion
+
+name: test
+
+token: sbp_719bcd7ec8ba594f2cacd7c5e35928e9d1bb2872
+
+
+new york times api:
+
+https://api.nytimes.com/svc/topstories/v2/technology.json?api-key=3gySNnE3Ly9D2zD3DEC9GroOYifGli9A
+
+the guardian:
+ccf302db-c402-40ac-8162-958c48941261
+
+https://content.guardianapis.com/search?q=technology&section=technology&show-fields=all&order-by=newest&api-key=ccf302db-c402-40ac-8162-958c48941261
+
+
+dev.to
+https://developers.forem.com/api/
+
+https://dev.to/api/articles?tag=javascript
+
+
+hacker news
+
+https://hn.algolia.com/api/v1/search?query=nuxt
+
+

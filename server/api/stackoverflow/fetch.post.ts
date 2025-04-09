@@ -3,15 +3,14 @@ import { defineEventHandler, readBody } from 'h3'
 export default defineEventHandler(async (event) => {
   try {
     const body = await readBody(event)
-    const { query, tags } = body
+    const { query } = body
 
     const baseUrl = 'https://api.stackexchange.com/2.3/search/advanced'
     const site = 'stackoverflow'
-    const tagged = tags?.join(';') || ''
+   
 
-    const url = `${baseUrl}?order=desc&sort=activity&q=${encodeURIComponent(
-      query || ''
-    )}&tagged=${encodeURIComponent(tagged)}&site=${site}`
+    const url = `${baseUrl}?order=desc&sort=activity&q=${encodeURIComponent(query || '')}&site=${site}`
+
 
     const response = await fetch(url)
     const result = await response.json()

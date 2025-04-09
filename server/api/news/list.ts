@@ -20,7 +20,6 @@ export default defineEventHandler(async () => {
     .from('newsapi')
     .select('*')
     .order('published_at', { ascending: false })
-    .limit(10)
 
   if (error) {
     console.error('Fel vid hämtning från Supabase:', error)

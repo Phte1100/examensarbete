@@ -12,6 +12,7 @@
   "dependencies": {
     "@headlessui/vue": "^1.7.23",
     "@heroicons/vue": "^2.2.0",
+    "@nuxt/ui": "^3.0.2",
     "@nuxtjs/supabase": "^1.5.0",
     "@nuxtjs/tailwindcss": "^6.13.2",
     "@supabase/ssr": "^0.6.1",
