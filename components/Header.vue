@@ -1,3 +1,5 @@
+
+
 <template>
   <Disclosure as="nav" class="bg-gray-800" v-slot="{ open }">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -6,6 +8,10 @@
           <NuxtLink to="/" class="flex items-center space-x-2">
             <span class="logo">Learnit</span>
           </NuxtLink>
+<div style="align-items: center; justify-content: center; display: flex; margin: auto;">
+  <UInput placeholder="Sök..." />
+</div>
+
           <div class="hidden md:block ml-10 space-x-4">
             <NuxtLink
               v-for="item in navigation"
