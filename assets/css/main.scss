@@ -131,6 +131,32 @@ $gradient-border: linear-gradient(144deg, #AF40FF, #5B42F3 50%, #00DDEB);
     }
   }
 }
+
+.search-form {
+  max-width: 300px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  margin: auto;
+  $gradient-border: linear-gradient(144deg, #AF40FF, #5B42F3 50%, #00DDEB);
+}
+
+input {
+  padding: 0.5rem 0.75rem;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  background:
+    linear-gradient(#fff, #fff) padding-box,
+    $gradient-border border-box;
+  outline: none;
+  font-size: 1rem;
+  transition: box-shadow 0.2s ease;
+
+  &:focus {
+    box-shadow: 0 0 0 3px rgba(175, 64, 255, 0.2);
+  }
+}
+
 /*Logo*/
 
 .logo {
