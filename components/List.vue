@@ -33,45 +33,16 @@
 </button>
 
   
-          <button
-            class="text-sm text-indigo-600 hover:underline"
-            @click="openModal(article)"
-          >
-            Läs mer
-          </button>
-        </div>
+<NuxtLink :to="`/singel?url=${encodeURIComponent(article.url)}`" class="text-sm font-semibold text-gray-900">
+  Läs mer <span aria-hidden="true">&rarr;</span>
+</NuxtLink>
+
+  
+      
+  
+    </div>
       </div>
-  
       <USeparator class="my-8" />
-  
-      <!-- Modal -->
-      <UModal v-model="showModal" class="max-w-2xl">
-        <template #header>
-          <h3 class="text-lg font-semibold">{{ selectedArticle?.title }}</h3>
-        </template>
-  
-        <div v-if="selectedArticle">
-          <img
-            v-if="selectedArticle.img_url || selectedArticle.url_to_image"
-            :src="selectedArticle.img_url || selectedArticle.url_to_image"
-            alt="Nyhetsbild"
-            class="rounded-xl mb-4 w-full object-cover max-h-72"
-          />
-          <p class="text-sm text-gray-500 mb-2">
-            {{ selectedArticle.author || selectedArticle.byline }} – {{ selectedArticle.published_at?.substring(0, 20) || selectedArticle.published_date?.substring(0, 20) }}
-          </p>
-          <p class="text-gray-700">{{ selectedArticle.content || selectedArticle.abstract || selectedArticle.description }}</p>
-          <div class="mt-4">
-            <a
-              :href="selectedArticle.url"
-              target="_blank"
-              class="text-blue-600 hover:underline"
-            >
-              Öppna originalartikel
-            </a>
-          </div>
-        </div>
-      </UModal>
     </div>
   </template>
   
@@ -82,14 +53,6 @@
   const articles = ref([])
   const supabase = useSupabaseClient()
   const user = useSupabaseUser()
-  
-  const showModal = ref(false)
-  const selectedArticle = ref(null)
-  
-  const openModal = (article) => {
-    selectedArticle.value = article
-    showModal.value = true
-  }
   
   const fetchArticles = async () => {
     try {

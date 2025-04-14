@@ -11,7 +11,7 @@ const handleLogin = async () => {
   email: email.value,
   options: {
     shouldCreateUser: true,
-    emailRedirectTo: 'http://localhost:3000/confirm' // eller produktions-URL
+    emailRedirectTo: '/confirm' // eller produktions-URL
   }
 })
 

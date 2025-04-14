@@ -17,7 +17,7 @@ export default defineEventHandler(async () => {
   )
 
   const { data, error } = await supabase
-    .from('NYtimes')
+    .from('nytimes')
     .select('*')
     .order('published_date', { ascending: false })
 
