@@ -3,27 +3,42 @@
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="flex h-16 items-center justify-between">
         <!-- Logga -->
-        <NuxtLink to="/" class="text-2xl font-bold text-gray-900 dark:text-white">
+        <NuxtLink to="/" class="text-2xl font-bold text-gray-900 ">
           Learnit
         </NuxtLink>
 
         <!-- Sökfält -->
         <div class="flex-1 flex justify-center px-4">
-          <form class="search-form">
-          <div class="form-group">
-        <input type="text" placeholder="Sök..."/>
-      </div>
-    </form>
-        </div>
+          <form class="search-form w-full max-w-xl" @submit.prevent="goToSearch">
+  <input
+    v-model="query"
+    type="text"
+    placeholder="Sök..."
+    class="w-full px-4 py-2 rounded border"
+  />
+</form>
+</div>
+
 
         <!-- Desktop länk -->
         <div class="hidden md:flex items-center space-x-4">
-          <NuxtLink
-            to="/login"
-            class="text-base font-semibold text-gray-900 hover:underline dark:text-white"
-          >
-            Logga in / Registrera
-          </NuxtLink>
+          <template v-if="user">
+  <button
+    @click="signOut"
+    class="text-base font-semibold text-gray-900 hover:underline "
+  >
+    Logga ut
+  </button>
+</template>
+<template v-else>
+  <NuxtLink
+    to="/login"
+    class="text-base font-semibold text-gray-900 hover:underline"
+  >
+    Logga in / Registrera
+  </NuxtLink>
+</template>
+
         </div>
 
         <!-- Mobilmenyknapp -->
@@ -38,19 +53,43 @@
 
     <!-- Mobilmeny -->
     <DisclosurePanel class="md:hidden bg-white/90">
-      <div class="px-2 pt-2 pb-3 space-y-1">
-        <NuxtLink
-          to="/login"
-          class="block px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-800"
-        >
-          Logga in / Registrera
-        </NuxtLink>
-      </div>
-    </DisclosurePanel>
+  <div class="px-2 pt-2 pb-3 space-y-1">
+    <template v-if="user">
+      <button
+        @click="signOut"
+        class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-800"
+      >
+        Logga ut
+      </button>
+    </template>
+    <template v-else>
+      <NuxtLink
+        to="/login"
+        class="block px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-800"
+      >
+        Logga in / Registrera
+      </NuxtLink>
+    </template>
+  </div>
+</DisclosurePanel>
   </Disclosure>
 </template>
 
 <script setup>
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
 import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
+const supabase = useSupabaseClient()
+const user = useSupabaseUser()
+
+const query = useState('searchQuery', () => '')
+
+
+
+
+async function signOut() {
+  const { error } = await supabase.auth.signOut()
+  if (error) {
+    alert('Kunde inte logga ut: ' + error.message)
+  }
+}
 </script>

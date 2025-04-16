@@ -1,42 +1,67 @@
 <script setup>
 const supabase = useSupabaseClient()
 
-const loading = ref(false)
 const email = ref('')
+const loading = ref(false)
+const step = ref('enter-email') // 'enter-email' | 'enter-code'
+const code = ref('')
+const message = ref('')
 
-const handleLogin = async () => {
-  try {
-    loading.value = true
-    const { error } = await supabase.auth.signInWithOtp({
-  email: email.value,
-  options: {
-    shouldCreateUser: true,
-    emailRedirectTo: '/confirm' // eller produktions-URL
-  }
-})
+async function requestOtp() {
+  loading.value = true
+  const { error } = await supabase.auth.signInWithOtp({
+    email: email.value,
+    options: { shouldCreateUser: true }
+  })
 
-    alert('Check your email for the login link!')
-  } catch (error) {
-    alert(error.error_description || error.message)
-  } finally {
-    loading.value = false
+  if (error) {
+    message.value = error.message
+  } else {
+    message.value = 'En pinkod har skickats till din e-post.'
+    step.value = 'enter-code'
   }
+  loading.value = false
+}
+
+async function verifyOtp() {
+  loading.value = true
+  const { data, error } = await supabase.auth.verifyOtp({
+    email: email.value,
+    token: code.value,
+    type: 'email'
+  })
+
+  if (error) {
+    message.value = error.message
+  } else {
+    message.value = 'Inloggningen lyckades!'
+    window.location.href = '/confirm' // går till confirm.vue som redirectar
+  }
+  loading.value = false
 }
 </script>
 
 <template>
-  <form class="login-form" @submit.prevent="handleLogin">
-      <p class="description">Logga in med din epost-adress</p>
-      <div class="form-group">
-        <input type="email" placeholder="Your email" v-model="email" />
-      </div>
-      <div>
-        <input
-          type="submit"
-          class="button-64"
-          :value="loading ? 'Laddar' : 'Skickar magic link'"
-          :disabled="loading"
-        />
-      </div>
+  <form @submit.prevent="step === 'enter-email' ? requestOtp() : verifyOtp()">
+    <p class="description">Logga in med e-post och pinkod</p>
+
+    <div v-if="step === 'enter-email'" class="form-group">
+      <input type="email" placeholder="Din e-post" v-model="email" required />
+    </div>
+
+    <div v-else class="form-group">
+      <input type="text" maxlength="6" placeholder="Ange pinkoden" v-model="code" required />
+    </div>
+
+    <div>
+      <input
+        type="submit"
+        class="button-64"
+        :value="loading ? 'Laddar...' : (step === 'enter-email' ? 'Skicka kod' : 'Logga in')"
+        :disabled="loading"
+      />
+    </div>
+
+    <p v-if="message" class="message">{{ message }}</p>
   </form>
 </template>

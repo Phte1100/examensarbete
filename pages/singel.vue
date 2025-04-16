@@ -14,6 +14,14 @@
   
       <p class="text-gray-700 mb-4">{{ article.content || article.abstract || article.description }}</p>
   
+      <button
+  @click="saveArticle"
+  class="text-sm text-blue-500 hover:underline float-right"
+>
+  📌 Spara artikel
+</button>
+
+
       <a :href="article.url" target="_blank" class="text-blue-600 hover:underline">Öppna originalartikel</a>
     </div>
   
@@ -43,6 +51,36 @@
       console.error('Kunde inte ladda artikeln:', err)
     }
   }
+
+  const supabase = useSupabaseClient()
+const user = useSupabaseUser()
+
+const saveArticle = async () => {
+  if (!user.value) {
+    alert('Du måste vara inloggad för att spara artiklar.')
+    return
+  }
+
+  const { title, url, img_url, url_to_image, published_at, published_date } = article.value
+
+  const { error } = await supabase.from('saved_articles').insert([
+    {
+      user_id: user.value.id,
+      title,
+      url,
+      img_url: img_url || url_to_image,
+      published_at: published_at || published_date,
+    }
+  ])
+
+  if (error) {
+    console.error('Kunde inte spara artikel:', error)
+    alert('Ett fel uppstod')
+  } else {
+    alert('Artikeln sparades!')
+  }
+}
+
   
   onMounted(fetchArticles)
   </script>

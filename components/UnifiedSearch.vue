@@ -1,26 +1,17 @@
 <template>
   <div class="p-6">
-    <form @submit.prevent="search" class="space-y-4">
-      <input
-        v-model="query"
-        type="text"
-        placeholder="Sök på t.ex. Nuxt"
-        class="w-full border border-gray-300 rounded p-2"
-      />
-      <button class="bg-blue-600 text-white px-4 py-2 rounded w-full hover:bg-blue-700">
-        Sök
-      </button>
-    </form>
-
     <!-- Stack Overflow -->
     <div v-if="results.stackoverflow?.length" class="mt-6">
       <h2 class="text-lg font-bold">#Stack Overflow</h2>
       <div
         v-for="(item, index) in visible.stackoverflow ? results.stackoverflow : results.stackoverflow.slice(0, 5)"
         :key="'so-' + index"
-        class="mt-2"
+        class="mt-2 flex justify-between gap-2"
       >
-        <a :href="item.link" target="_blank" class="text-blue-600 hover:underline">{{ item.title }}</a>
+        <a :href="item.link" target="_blank" class="text-blue-600 hover:underline flex-1">
+          {{ item.title }}
+        </a>
+        <button @click="saveThread(item, 'stackoverflow')" class="text-sm text-blue-500 hover:underline">📌</button>
       </div>
       <button
         v-if="results.stackoverflow.length > 5"
@@ -37,9 +28,12 @@
       <div
         v-for="(item, index) in visible.hackernews ? results.hackernews : results.hackernews.slice(0, 5)"
         :key="'hn-' + index"
-        class="mt-2"
+        class="mt-2 flex justify-between gap-2"
       >
-        <a :href="item.link" target="_blank" class="text-orange-600 hover:underline">{{ item.title }}</a>
+        <a :href="item.link" target="_blank" class="text-orange-600 hover:underline flex-1">
+          {{ item.title }}
+        </a>
+        <button @click="saveThread(item, 'hackernews')" class="text-sm text-orange-500 hover:underline">📌</button>
       </div>
       <button
         v-if="results.hackernews.length > 5"
@@ -56,9 +50,12 @@
       <div
         v-for="(item, index) in visible.devto ? results.devto : results.devto.slice(0, 5)"
         :key="'devto-' + index"
-        class="mt-2"
+        class="mt-2 flex justify-between gap-2"
       >
-        <a :href="item.url" target="_blank" class="text-indigo-600 hover:underline">{{ item.title }}</a>
+        <a :href="item.url" target="_blank" class="text-indigo-600 hover:underline flex-1">
+          {{ item.title }}
+        </a>
+        <button @click="saveThread(item, 'devto')" class="text-sm text-indigo-500 hover:underline">📌</button>
       </div>
       <button
         v-if="results.devto.length > 5"
@@ -80,21 +77,26 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, watchEffect } from 'vue'
+const supabase = useSupabaseClient()
+const user = useSupabaseUser()
 
-const query = ref('')
+// 🧠 Global query från Header.vue
+const query = useState('searchQuery', () => '')
+const searched = ref(false)
+
 const results = ref({
   stackoverflow: [],
   hackernews: [],
   devto: []
 })
-const searched = ref(false)
 
 const visible = ref({
   stackoverflow: false,
   hackernews: false,
   devto: false
 })
+
 const search = async () => {
   searched.value = true
   visible.value = {
@@ -109,8 +111,7 @@ const search = async () => {
   })
 
   if (res.success) {
-    // Sortera varje källa efter datum (senaste först)
-    const sorted = {
+    results.value = {
       stackoverflow: (res.stackoverflow || []).sort((a, b) =>
         new Date(b.creation_date) - new Date(a.creation_date)
       ),
@@ -121,12 +122,42 @@ const search = async () => {
         new Date(b.published_at) - new Date(a.published_at)
       )
     }
-
-    results.value = sorted
   } else {
     alert('Sökningen misslyckades.')
   }
 }
 
-</script>
+// 🔄 Kör sökning varje gång query ändras (eller vid inladdning)
+watchEffect(() => {
+  if (query.value.trim()) {
+    search()
+  }
+})
 
+const saveThread = async (item, source) => {
+  if (!user.value) {
+    alert('Du måste vara inloggad för att spara trådar.')
+    return
+  }
+
+  const { error } = await supabase.from('saved_threads').insert([
+    {
+      user_id: user.value.id,
+      title: item.title,
+      url: item.link || item.url,
+      source
+    }
+  ])
+
+  if (error) {
+    if (error.code === '23505') {
+      alert('Tråden är redan sparad.')
+    } else {
+      console.error('Fel vid sparning:', error)
+      alert('Kunde inte spara tråden.')
+    }
+  } else {
+    alert('Tråden sparades!')
+  }
+}
+</script>
