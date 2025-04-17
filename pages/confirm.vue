@@ -1,36 +1,41 @@
 <script setup>
 import { useSupabaseClient, useSupabaseUser } from '#imports'
 import { useRouter } from 'vue-router'
+import { watchEffect } from 'vue'
 
 const supabase = useSupabaseClient()
 const user = useSupabaseUser()
 const router = useRouter()
 
-onMounted(async () => {
-  const { data, error } = await supabase.auth.getSession()
-  console.log('SESSION:', data?.session)
+watchEffect(async () => {
+  if (!user.value) return
 
+  const { data, error } = await supabase.auth.getSession()
   if (error) {
     console.error('Session error:', error)
+    return
   }
 
   if (data?.session) {
-    const { data: profile } = await supabase
-  .from('profiles')
-  .select('username, website')
-  .eq('id', user.value.id)
-  .single()
+    const { data: profile, error: profileError } = await supabase
+      .from('profiles')
+      .select('username, website')
+      .eq('id', user.value.id)
+      .single()
 
-if (!profile?.username || !profile?.website) {
-  router.push('/complete-profile')
-} else {
-  router.push('/')
-}
+    if (profileError) {
+      console.error('Kunde inte hämta profil:', profileError)
+      return
+    }
 
-} else {
-  router.push('/login')
-}
-
+    if (!profile?.username) {
+      router.push('/complete-profile')
+    } else {
+      router.push('/')
+    }
+  } else {
+    router.push('/login')
+  }
 })
 </script>
 

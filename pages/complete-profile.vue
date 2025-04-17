@@ -4,7 +4,6 @@ const user = useSupabaseUser()
 const router = useRouter()
 
 const username = ref('')
-const website = ref('')
 const loading = ref(false)
 
 const submit = async () => {
@@ -12,7 +11,6 @@ const submit = async () => {
   const updates = {
     id: user.value.id,
     username: username.value,
-    website: website.value,
     updated_at: new Date(),
   }
 
@@ -35,10 +33,6 @@ const submit = async () => {
       <div>
         <label for="username">Användarnamn</label>
         <input id="username" v-model="username" required />
-      </div>
-      <div>
-        <label for="website">Webbplats</label>
-        <input id="website" v-model="website" />
       </div>
       <button :disabled="loading">{{ loading ? 'Sparar...' : 'Spara' }}</button>
     </form>

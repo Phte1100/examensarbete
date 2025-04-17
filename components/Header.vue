@@ -78,18 +78,25 @@
 <script setup>
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
 import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
+import { useRouter } from 'vue-router'
+
 const supabase = useSupabaseClient()
 const user = useSupabaseUser()
-
 const query = useState('searchQuery', () => '')
+const router = useRouter()
 
+const goToSearch = () => {
+  if (query.value.trim()) {
+    router.push('/search')
+  }
+}
 
-
-
-async function signOut() {
+const signOut = async () => {
   const { error } = await supabase.auth.signOut()
+  router.push('/login')
   if (error) {
     alert('Kunde inte logga ut: ' + error.message)
   }
 }
+
 </script>

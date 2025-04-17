@@ -81,7 +81,7 @@ import { ref, watchEffect } from 'vue'
 const supabase = useSupabaseClient()
 const user = useSupabaseUser()
 
-// 🧠 Global query från Header.vue
+//Global query från Header.vue
 const query = useState('searchQuery', () => '')
 const searched = ref(false)
 
