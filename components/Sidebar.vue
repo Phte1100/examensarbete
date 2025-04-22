@@ -12,10 +12,7 @@
         </ul>
       </nav>
   
-      <div>
-        <h2 class="font-bold text-lg text-gray-700">Filtrera</h2>
-        <p class="text-gray-500"></p>
-      </div>
+      <Filter />
 
     </aside>
   </template>

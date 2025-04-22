@@ -13,20 +13,70 @@
       <div class="col-span-2 col-start-2 col-end-4">
         <List />
       </div>
-        <UnifiedSearch />
+      <div class="col-span-1 space-y-6">
+  <div>
+    <h2 class="text-center font-bold">#Stack Overflow</h2>
+    <ul>
+      <li v-for="item in latestThreads.stackoverflow" :key="item.link">
+        <a :href="item.link" class="text-blue-600 hover:underline">{{ item.title }}</a>
+      </li>
+    </ul>
+  </div>
+
+  <div>
+    <h2 class="text-center font-bold">#Hacker News</h2>
+    <ul>
+      <li v-for="item in latestThreads.hackernews" :key="item.link">
+        <a :href="item.link" class="text-orange-600 hover:underline">{{ item.title }}</a>
+      </li>
+    </ul>
+  </div>
+
+  <div>
+    <h2 class="text-center font-bold">#Dev.to</h2>
+    <ul>
+      <li v-for="item in latestThreads.devto" :key="item.link">
+        <a :href="item.link" class="text-indigo-600 hover:underline">{{ item.title }}</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+
       </div>
-      <NyNewsx3 />
     </div>
   </div>
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue'
+
+const latestThreads = ref({
+  stackoverflow: [],
+  hackernews: [],
+  devto: []
+})
+
+const fetchLatestThreads = async () => {
+  const res = await $fetch('/api/search/fetch', {
+    method: 'POST',
+    body: { query: '' }
+  })
+
+  if (res.success) {
+    latestThreads.value = {
+      stackoverflow: res.stackoverflow.slice(0, 5),
+      hackernews: res.hackernews.slice(0, 5),
+      devto: res.devto.slice(0, 5)
+    }
+  }
+}
+
+onMounted(fetchLatestThreads)
+
 const handleClick = async () => {
   try {
-    const response = await $fetch('/api/news/fetch', {
-      method: 'POST',
-    })
-
+    const response = await $fetch('/api/news/fetch', { method: 'POST' })
     if (response.success) {
       alert(`Hämtade och sparade ${response.inserted} artiklar till Supabase!`)
     } else {
@@ -38,3 +88,4 @@ const handleClick = async () => {
   }
 }
 </script>
+

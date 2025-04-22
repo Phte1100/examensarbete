@@ -1,5 +1,23 @@
 <template>
   <div class="p-6">
+    <!-- Nyheter från Supabase -->
+    <div v-if="results.news?.length" class="mt-6">
+      <h2 class="text-lg font-bold">#Nyheter</h2>
+      <ul class="space-y-2">
+        <li v-for="(item, index) in visible.news ? results.news : results.news.slice(0, 5)" :key="'news-' + index">
+          <a :href="item.url" target="_blank" class="text-gray-800 hover:underline block">{{ item.title }}</a>
+          <p class="text-sm text-gray-500">{{ item.published_at?.substring(0, 10) }} – {{ item.source_name }}</p>
+        </li>
+      </ul>
+      <button
+        v-if="results.news.length > 5"
+        @click="visible.news = !visible.news"
+        class="text-sm mt-2 text-gray-600 hover:underline"
+      >
+        {{ visible.news ? 'Visa färre' : 'Visa fler' }}
+      </button>
+    </div>
+
     <!-- Stack Overflow -->
     <div v-if="results.stackoverflow?.length" class="mt-6">
       <h2 class="text-lg font-bold">#Stack Overflow</h2>
@@ -68,7 +86,7 @@
 
     <!-- Inga resultat -->
     <p
-      v-if="searched && !results.stackoverflow?.length && !results.hackernews?.length && !results.devto?.length"
+      v-if="searched && !results.news?.length && !results.stackoverflow?.length && !results.hackernews?.length && !results.devto?.length"
       class="mt-4 text-red-600"
     >
       Inga resultat hittades.
@@ -81,17 +99,18 @@ import { ref, watchEffect } from 'vue'
 const supabase = useSupabaseClient()
 const user = useSupabaseUser()
 
-//Global query från Header.vue
 const query = useState('searchQuery', () => '')
 const searched = ref(false)
 
 const results = ref({
+  news: [],
   stackoverflow: [],
   hackernews: [],
   devto: []
 })
 
 const visible = ref({
+  news: false,
   stackoverflow: false,
   hackernews: false,
   devto: false
@@ -99,35 +118,31 @@ const visible = ref({
 
 const search = async () => {
   searched.value = true
-  visible.value = {
-    stackoverflow: false,
-    hackernews: false,
-    devto: false
-  }
+  visible.value = { news: false, stackoverflow: false, hackernews: false, devto: false }
 
-  const res = await $fetch('/api/search/fetch', {
-    method: 'POST',
-    body: { query: query.value }
-  })
+  const [apiRes, newsRes] = await Promise.all([
+    $fetch('/api/search/fetch', {
+      method: 'POST',
+      body: { query: query.value }
+    }),
+    $fetch('/api/news/search', {
+      method: 'POST',
+      body: { query: query.value }
+    })
+  ])
 
-  if (res.success) {
+  if (apiRes.success && newsRes.success) {
     results.value = {
-      stackoverflow: (res.stackoverflow || []).sort((a, b) =>
-        new Date(b.creation_date) - new Date(a.creation_date)
-      ),
-      hackernews: (res.hackernews || []).sort((a, b) =>
-        new Date(b.created_at) - new Date(a.created_at)
-      ),
-      devto: (res.devto || []).sort((a, b) =>
-        new Date(b.published_at) - new Date(a.published_at)
-      )
+      news: (newsRes.data || []).sort((a, b) => new Date(b.published_at) - new Date(a.published_at)),
+      stackoverflow: (apiRes.stackoverflow || []).sort((a, b) => new Date(b.creation_date) - new Date(a.creation_date)),
+      hackernews: (apiRes.hackernews || []).sort((a, b) => new Date(b.created_at) - new Date(a.created_at)),
+      devto: (apiRes.devto || []).sort((a, b) => new Date(b.published_at) - new Date(a.published_at))
     }
   } else {
     alert('Sökningen misslyckades.')
   }
 }
 
-// 🔄 Kör sökning varje gång query ändras (eller vid inladdning)
 watchEffect(() => {
   if (query.value.trim()) {
     search()

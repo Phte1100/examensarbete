@@ -13,6 +13,7 @@
     <!-- Innehåll -->
     <div class="relative z-10">
       <Header />
+      <UBreadcrumb />
       <slot />
     </div>
   </div>
