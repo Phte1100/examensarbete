@@ -13,7 +13,7 @@
       </nav>
   
       <Filter />
-
+      <h2 class="font-bold text-lg text-gray-700">Mina sökningar</h2>
     </aside>
   </template>
   

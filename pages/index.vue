@@ -15,7 +15,7 @@
       </div>
       <div class="col-span-1 space-y-6">
   <div>
-    <h2 class="text-center font-bold">#Stack Overflow</h2>
+    <h2 class="font-bold">#Stack Overflow</h2>
     <ul>
       <li v-for="item in latestThreads.stackoverflow" :key="item.link">
         <a :href="item.link" class="text-blue-600 hover:underline">{{ item.title }}</a>
@@ -24,7 +24,7 @@
   </div>
 
   <div>
-    <h2 class="text-center font-bold">#Hacker News</h2>
+    <h2 class="font-bold">#Hacker News</h2>
     <ul>
       <li v-for="item in latestThreads.hackernews" :key="item.link">
         <a :href="item.link" class="text-orange-600 hover:underline">{{ item.title }}</a>
@@ -33,7 +33,7 @@
   </div>
 
   <div>
-    <h2 class="text-center font-bold">#Dev.to</h2>
+    <h2 class="font-bold">#Dev.to</h2>
     <ul>
       <li v-for="item in latestThreads.devto" :key="item.link">
         <a :href="item.link" class="text-indigo-600 hover:underline">{{ item.title }}</a>

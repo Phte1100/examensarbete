@@ -21,17 +21,6 @@
       <!-- Desktop: sidnummer -->
       <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
         <div>
-          <p class="text-sm text-gray-700">
-            Visar
-            <span class="font-medium">{{ startItem }}</span>
-            till
-            <span class="font-medium">{{ endItem }}</span>
-            av
-            <span class="font-medium">{{ totalItems }}</span>
-            resultat
-          </p>
-        </div>
-        <div>
           <nav class="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
             <button
               @click="changePage(currentPage - 1)"
@@ -91,5 +80,20 @@
   const endItem = computed(() =>
     Math.min(props.currentPage * props.perPage, props.totalItems)
   )
+
+  /*
+          <div>
+          <p class="text-sm text-gray-700">
+            Visar
+            <span class="font-medium">{{ startItem }}</span>
+            till
+            <span class="font-medium">{{ endItem }}</span>
+            av
+            <span class="font-medium">{{ totalItems }}</span>
+            resultat
+          </p>
+        </div>
+  */
   </script>
+  
   
