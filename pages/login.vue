@@ -4,8 +4,6 @@ const user = useSupabaseUser()
 </script>
 
 <template>
-    
-    <LogoAnimation />
     <Auth />
 
 </template>
