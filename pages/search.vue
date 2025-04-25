@@ -2,21 +2,29 @@
     <div class="container mx-auto p-4">
       <h1 class="text-2xl font-bold mb-4">Resultat för "{{ query }}"</h1>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <!-- Nyheter -->
-        <div>
-          <h2 class="text-center font-semibold mb-2">#Nyheter</h2>
-          <div v-if="results.news.length">
-            <div
-              v-for="(item, index) in results.news"
-              :key="index"
-              class="p-2 border-b"
-            >
-              <p class="text-sm text-gray-500">{{ item.published_at?.slice(0, 10) }} - {{ item.source || 'Okänd' }}</p>
-              <h3 class="font-medium text-gray-800">{{ item.title }}</h3>
-            </div>
-          </div>
-          <p v-else class="text-sm text-gray-400 text-center">Inga nyheter</p>
-        </div>
+<!-- Nyheter -->
+<div>
+  <h2 class="text-center font-semibold mb-2">#Nyheter</h2>
+  <div v-if="results.news.length">
+    <div
+      v-for="(item, index) in results.news"
+      :key="index"
+      class="p-2 border-b"
+    >
+      <p class="text-sm text-gray-500">
+        {{ item.published_at?.slice(0, 10) }} - {{ item.source || 'Okänd' }}
+      </p>
+      <NuxtLink
+        :to="`/singel?url=${encodeURIComponent(item.url)}`"
+        class="font-medium text-gray-800 hover:underline block"
+      >
+        {{ item.title }}
+      </NuxtLink>
+    </div>
+  </div>
+  <p v-else class="text-sm text-gray-400 text-center">Inga nyheter</p>
+</div>
+
   
         <!-- Stack Overflow -->
         <div>

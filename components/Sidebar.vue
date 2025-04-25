@@ -5,10 +5,9 @@
         <h2 class="font-bold text-lg text-gray-700">Kategorier</h2>
         <ul class="space-y-1">
           <li><NuxtLink to="/" class="hover:underline">Hem</NuxtLink></li>
-          <li><NuxtLink to="/404" class="hover:underline">Mina sidor</NuxtLink></li>
-          <li><NuxtLink to="/404" class="hover:underline">Nyheter</NuxtLink></li>
-          <li><NuxtLink to="/404" class="hover:underline">Trådar</NuxtLink></li>
-          <li><NuxtLink to="/404" class="hover:underline">Hacker News</NuxtLink></li>
+          <li><NuxtLink to="/me" class="hover:underline">Mina sidor</NuxtLink></li>
+          <li><NuxtLink to="/404" class="hover:underline">Om sidan</NuxtLink></li>
+          <li><NuxtLink to="/404" class="hover:underline">API:er</NuxtLink></li>
         </ul>
       </nav>
   
