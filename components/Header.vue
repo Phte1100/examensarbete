@@ -14,6 +14,7 @@
     v-model="query"
     type="text"
     placeholder="Sök..."
+    aria-label="Sök"
     class="w-full px-4 py-2 rounded border"
   />
 </form>
@@ -61,6 +62,9 @@
       >
         Logga ut
       </button>
+
+      <Sidebar />
+
     </template>
     <template v-else>
       <NuxtLink

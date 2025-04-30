@@ -6,7 +6,7 @@
   >
     <span
       class="material-icons transition-colors"
-      :class="isBookmarked ? 'text-blue-600' : 'text-gray-400 hover:text-blue-600'"
+      :class="isBookmarked ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'"
     >
       bookmark
     </span>
@@ -58,7 +58,7 @@ const handleBookmark = async () => {
   loading.value = true
 
   if (isBookmarked.value) {
-    // 🧹 Ta bort bokmärke
+    // Ta bort bokmärke
     const { error } = await supabase
       .from('saved_articles')
       .delete()

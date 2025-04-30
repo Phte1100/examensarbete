@@ -1,13 +1,23 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
 export default defineNuxtConfig({
-  ssr: false, // viktig!
+  app: {
+    head: {
+      charset: 'utf-16',
+      viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
+      title: 'Learnit',
+      htmlAttrs: {
+        lang: 'sv',
+      }
+    }
+  },
+  ssr: false,
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
   supabase: {
     redirectOptions: {
       login: '/login',
-      callback: '/confirm', // dit magic linken går
+      callback: '/confirm', 
     }
   },
   modules: ['@nuxtjs/supabase', '@nuxtjs/tailwindcss', '@nuxt/ui'],
@@ -17,11 +27,9 @@ export default defineNuxtConfig({
   ],
 
   runtimeConfig: {
-    // Dessa är privata och tillgängliga endast på servern
     NEWS_API_KEY: process.env.NEWS_API_KEY,
 
     public: {
-      // Dessa är publika och kan användas på både klient & server
       supabaseUrl: process.env.SUPABASE_URL,
       supabaseKey: process.env.SUPABASE_KEY
     }

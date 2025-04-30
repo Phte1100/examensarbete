@@ -1,7 +1,7 @@
 <template>
   <div class="relative min-h-screen">
     <div class="flex flex-col items-center justify-center min-h-screen p-6">
-
+      <h1 class="mb-4 text-4xl font-bold leading-none tracking-tight text-black-900 md:text-5xl lg:text-6xl ">Learnit => Knowit</h1>
       <div
         class="mt-6 space-y-12 lg:grid lg:grid-cols-4 lg:gap-x-3 lg:space-y-0"
         style="max-width: 1200px;"
@@ -18,7 +18,10 @@
     <h2 class="font-bold">#Stack Overflow</h2>
     <ul>
       <li v-for="item in latestThreads.stackoverflow" :key="item.link">
-        <a :href="item.link" class="text-blue-600 hover:underline">{{ item.title }}</a>
+        <a :href="item.link" class="hover:underline" style="color: #333366">
+  {{ item.title }}
+  <USeparator />
+</a>
       </li>
     </ul>
   </div>
@@ -27,7 +30,10 @@
     <h2 class="font-bold">#Hacker News</h2>
     <ul>
       <li v-for="item in latestThreads.hackernews" :key="item.link">
-        <a :href="item.link" class="text-orange-600 hover:underline">{{ item.title }}</a>
+        <a :href="item.link" class="hover:underline" style="color: #00473C">
+  {{ item.title }}
+</a>
+<USeparator />
       </li>
     </ul>
   </div>
@@ -36,7 +42,10 @@
     <h2 class="font-bold">#Dev.to</h2>
     <ul>
       <li v-for="item in latestThreads.devto" :key="item.link">
-        <a :href="item.link" class="text-indigo-600 hover:underline">{{ item.title }}</a>
+        <a :href="item.link" class="hover:underline" style="color: #333366">
+  {{ item.title }}
+</a>
+<USeparator />
       </li>
     </ul>
   </div>

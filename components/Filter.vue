@@ -10,7 +10,13 @@ const sources = [
   { label: 'Wired', value: 'wired' },
   { label: 'The Verge', value: 'the-verge' },
   { label: 'TechRadar', value: 'techradar' },
-  { label: 'New York Times', value: 'nyt' }
+  { label: 'New York Times', value: 'nyt' },
+  { label: 'Ars Technica', value: 'ars-technica' },
+  { label: 'TechCrunch', value: 'techcrunch' },
+  { label: 'Recode', value: 'recode' },
+  { label: 'The Next Web', value: 'the-next-web' },
+  { label: 'Hacker News', value: 'hacker-news' },
+  { label: 'Mashable', value: 'mashable' }
 ]
 
 const toggleSource = (source) => {

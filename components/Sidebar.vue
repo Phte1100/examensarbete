@@ -12,7 +12,14 @@
       </nav>
   
       <Filter />
-      <h2 class="font-bold text-lg text-gray-700">Mina sökningar</h2>
+    </aside>
+  </template>
+  
+  <script setup>
+  // Inget särskilt just nu
+
+  /*
+  <h2 class="font-bold text-lg text-gray-700">Mina sökningar</h2>
       <span class="text-xs bg-gray-600 text-white px-2 py-1 rounded-full mb-2 inline-block mr-2">
         Tariffer
       </span>
@@ -22,10 +29,6 @@
       <span class="text-xs bg-gray-600 text-white px-2 py-1 rounded-full mb-2 inline-block">
         Javascript
       </span>
-    </aside>
-  </template>
-  
-  <script setup>
-  // Inget särskilt just nu
+  */
   </script>
   

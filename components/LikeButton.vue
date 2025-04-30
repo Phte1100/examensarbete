@@ -7,7 +7,7 @@
     >
       <span
         class="material-icons transition-colors duration-200"
-        :class="liked ? 'text-red-600' : 'text-gray-400 group-hover:text-red-500'"
+        :class="liked ? 'text-red-600' : 'text-gray-700 group-hover:text-red-500'"
       >
         favorite
       </span>

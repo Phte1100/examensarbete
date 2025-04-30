@@ -25,6 +25,7 @@
             <button
               @click="changePage(currentPage - 1)"
               :disabled="currentPage === 1"
+              aria-label="Föregående sida"
               class="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 disabled:opacity-50"
             >
               <ChevronLeftIcon class="h-5 w-5" />
@@ -47,6 +48,7 @@
             <button
               @click="changePage(currentPage + 1)"
               :disabled="currentPage === totalPages"
+              aria-label="Nästa sida"
               class="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 disabled:opacity-50"
             >
               <ChevronRightIcon class="h-5 w-5" />

@@ -3,7 +3,7 @@
     <div
       v-for="(article, index) in paginatedArticles"
       :key="index"
-      class="border border-gray-200 rounded-3xl p-5 transition-shadow hover:scale-[1.02] hover:shadow-[0_6px_18px_-2px_#808080]"
+      class="border border-gray-200 rounded-3xl p-5 transition-shadow hover:scale-[1.02] hover:shadow-[0_6px_18px_-2px_#808080] bg-white"
     >
       <div v-if="article.img_url || article.url_to_image" class="mb-4">
         <img
@@ -63,17 +63,17 @@
 import { onMounted, ref, computed } from 'vue'
 import { useSupabaseClient, useSupabaseUser } from '#imports'
 
-// 🟡 State
+// State
 const articles = ref([])
 const currentPage = ref(1)
 const perPage = 5
 const supabase = useSupabaseClient()
 const user = useSupabaseUser()
 
-// ✅ Globalt filter-state
+// Globalt filter-state
 const selectedSources = useState('selectedSources', () => ['wired', 'the-verge', 'techradar', 'nyt'])
 
-// 🧠 Källa → identifieringar som kan förekomma i artiklar
+// Källa → identifieringar som kan förekomma i artiklar
 const sourceMap = {
   wired: 'wired',
   'the-verge': 'the verge',
@@ -82,7 +82,7 @@ const sourceMap = {
 }
 
 
-// 🧲 Hämta artiklar
+// Hämta artiklar
 const fetchArticles = async () => {
   try {
     const [resNewsapi, resNyt] = await Promise.all([
@@ -95,12 +95,12 @@ const fetchArticles = async () => {
         article.url && self.findIndex(a => a.url === article.url) === index
     )
 
-    // 🔄 Hämta likes från Supabase
+    // Hämta likes från Supabase
     const { data: likesData } = await supabase.from('likes').select('*')
 
     const userId = user.value?.id
 
-    // 🔁 Lägg till likes + om användaren har gillat
+    // Lägg till likes + om användaren har gillat
     const enriched = uniqueArticles.map(article => {
       const count = likesData.filter(l => l.news_id === article.id).length
       const hasLiked = likesData.some(l => l.news_id === article.id && l.user_id === userId)
@@ -119,7 +119,7 @@ const fetchArticles = async () => {
 }
 
 
-// 🧹 Filtrera artiklar baserat på källa
+// Filtrera artiklar baserat på källa
 const filteredArticles = computed(() => {
   return articles.value.filter(article => {
     const rawSource = (article.source_name || article.source || '').toLowerCase()
@@ -137,12 +137,12 @@ const filteredArticles = computed(() => {
 
 
 
-// 🔃 Sortera efter datum
+// Sortera efter datum
 const sortedArticles = computed(() =>
   [...filteredArticles.value].sort((a, b) => new Date(b.published_at) - new Date(a.published_at))
 )
 
-// 📄 Pagination
+// Pagination
 const totalPages = computed(() => Math.ceil(sortedArticles.value.length / perPage))
 const paginatedArticles = computed(() => {
   const start = (currentPage.value - 1) * perPage
