@@ -1,5 +1,5 @@
 <template>
-    <aside class="p-4 space-y-4 text-sm text-gray-800 sticky top-20 h-fit">
+    <aside class="p-4 space-y-4 text-lg text-gray-800 sticky top-20 h-fit ml-10">
 
       <nav class="space-y-2">
         <h2 class="font-bold text-lg text-gray-700">Kategorier</h2>

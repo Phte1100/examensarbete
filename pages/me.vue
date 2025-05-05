@@ -13,30 +13,76 @@
       <!-- Sparade artiklar -->
       <section v-if="articles.length">
   <h2 class="text-xl font-semibold mb-2">Sparade artiklar</h2>
-  <ul class="space-y-2">
-    <li v-for="a in articles" :key="a.id" class="border-b pb-2 flex justify-between items-center gap-2">
-      <div>
-        <a :href="a.url" class="text-blue-600 hover:underline" target="_blank">{{ a.title }}</a>
-        <p class="text-sm text-gray-500">{{ a.published_at?.substring(0, 10) }}</p>
-      </div>
-      <button @click="deleteArticle(a.id)" class="text-red-600 hover:underline text-sm">🗑</button>
-    </li>
-  </ul>
+  <ul class="divide-y">
+  <li
+    v-for="a in articles"
+    :key="a.id"
+    class="flex justify-between items-center py-4"
+  >
+    <div>
+      <p class="text-sm text-gray-500">
+        {{ a.published_at?.substring(0, 10) }}
+      </p>
+      <a
+        :href="a.url"
+        class="text-base font-medium text-black hover:underline"
+        target="_blank"
+      >
+        {{ a.title }}
+      </a>
+      <p class="text-sm text-gray-500">
+        Källa: {{ a.source || 'Okänd' }}
+      </p>
+    </div>
+
+    <button
+      @click="deleteArticle(a.id)"
+      class="material-symbols-outlined text-gray-500 hover:text-red-600 transition"
+      title="Ta bort"
+    >
+      delete
+    </button>
+  </li>
+</ul>
+
 </section>
 
   
       <!-- Sparade trådar -->
       <section v-if="threads.length">
   <h2 class="text-xl font-semibold mb-2">Sparade trådar</h2>
-  <ul class="space-y-2">
-    <li v-for="t in threads" :key="t.id" class="border-b pb-2 flex justify-between items-center gap-2">
-      <div>
-        <a :href="t.url" class="text-blue-600 hover:underline" target="_blank">{{ t.title }}</a>
-        <p class="text-sm text-gray-500">Källa: {{ t.source }}</p>
-      </div>
-      <button @click="deleteThread(t.id)" class="text-red-600 hover:underline text-sm">🗑</button>
-    </li>
-  </ul>
+  <ul class="divide-y">
+  <li
+    v-for="t in threads"
+    :key="t.id"
+    class="flex justify-between items-center py-4"
+  >
+    <div>
+      <p class="text-sm text-gray-500">
+        {{ t.created_at?.substring(0, 10) }}
+      </p>
+      <a
+        :href="t.url"
+        class="text-base font-medium text-black hover:underline"
+        target="_blank"
+      >
+        {{ t.title }}
+      </a>
+      <p class="text-sm text-gray-500">
+        Källa: {{ t.source }}
+      </p>
+    </div>
+
+    <button
+      @click="deleteThread(t.id)"
+      class="material-symbols-outlined text-gray-500 hover:text-red-600 transition"
+      title="Ta bort"
+    >
+      delete
+    </button>
+  </li>
+</ul>
+
 </section>
 
     </div>

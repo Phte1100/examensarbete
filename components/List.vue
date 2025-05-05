@@ -3,46 +3,49 @@
     <div
       v-for="(article, index) in paginatedArticles"
       :key="index"
-      class="border border-gray-200 rounded-3xl p-5 transition-shadow hover:scale-[1.02] hover:shadow-[0_6px_18px_-2px_#808080] bg-white"
+      class="rounded-3xl p-[3px] bg-gradient-to-br from-[#55D440] via-[#372BC5] to-[#0B0B26] hover:scale-[1.02] transition-transform"
     >
-      <div v-if="article.img_url || article.url_to_image" class="mb-4">
-        <img
-          :src="article.img_url || article.url_to_image"
-          alt="Bild"
-          class="rounded-xl w-full object-cover max-h-60"
-        />
-      </div>
+      <div class="bg-white rounded-[22px] p-5 shadow hover:shadow-[0_6px_18px_-2px_#808080]">
+        <!-- Bild -->
+        <div v-if="article.img_url || article.url_to_image" class="mb-4">
+          <img
+            :src="article.img_url || article.url_to_image"
+            alt="Bild"
+            class="rounded-xl w-full object-cover max-h-60"
+          />
+        </div>
 
-      <span class="text-xs bg-gray-800 text-white px-2 py-1 rounded-full mb-2 inline-block">
-        {{ article.source_name || article.source || 'New York Times' }}
-      </span>
+        <!-- Källa -->
+        <span class="text-xs bg-gray-800 text-white px-2 py-1 rounded-full mb-2 inline-block">
+          {{ article.source_name || article.source || 'New York Times' }}
+        </span>
 
-      <h2 class="text-xl font-bold text-gray-800 mb-1">{{ article.title }}</h2>
-      <p class="text-sm text-gray-500 mb-2">
-        {{ article.author || article.byline }} –
-        {{
-          article.published_at?.substring(0, 20) || article.published_date?.substring(0, 20)
-        }}
-      </p>
-      <p class="text-gray-700 mb-2">{{ article.description || article.abstract }}</p>
+        <!-- Titel och info -->
+        <h2 class="text-xl font-bold text-gray-800 mb-1">{{ article.title }}</h2>
+        <p class="text-sm text-gray-500 mb-2">
+          {{ article.author || article.byline }} –
+          {{ article.published_at?.substring(0, 20) || article.published_date?.substring(0, 20) }}
+        </p>
+        <p class="text-gray-700 mb-2">{{ article.description || article.abstract }}</p>
 
-      <div class="flex items-center space-x-4">
-        <LikeButton
-  v-if="user"
-  :article-id="article.id"
-  :initial-likes="article.likes"
-  :initial-user-liked="article.userHasLiked"
-/>
+        <!-- Interaktiva knappar -->
+        <div class="flex items-center space-x-4">
+          <LikeButton
+            v-if="user"
+            :article-id="article.id"
+            :initial-likes="article.likes"
+            :initial-user-liked="article.userHasLiked"
+          />
 
+          <BookmarkButton v-if="user" :article="article" />
 
-<BookmarkButton v-if="user" :article="article" />
-
-        <NuxtLink
-          :to="`/singel?url=${encodeURIComponent(article.url)}`"
-          class="text-sm font-semibold text-gray-900"
-        >
-          Läs mer <span aria-hidden="true">&rarr;</span>
-        </NuxtLink>
+          <NuxtLink
+            :to="`/singel?url=${encodeURIComponent(article.url)}`"
+            class="text-sm font-semibold text-gray-900"
+          >
+            Läs mer <span aria-hidden="true">&rarr;</span>
+          </NuxtLink>
+        </div>
       </div>
     </div>
 
@@ -54,10 +57,10 @@
       :per-page="perPage"
       @update:page="currentPage = $event"
     />
-
-    <USeparator class="my-8" />
   </div>
 </template>
+
+
 
 <script setup>
 import { onMounted, ref, computed } from 'vue'
