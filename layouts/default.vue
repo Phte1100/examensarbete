@@ -7,7 +7,11 @@
 
     <!-- Innehåll -->
     <div class="relative z-10 bg-regal-purple">
-      <Header />
+      <Navbar />
       <slot />
     </div>
 </template>
+
+<script>
+
+</script>

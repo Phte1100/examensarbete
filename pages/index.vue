@@ -1,4 +1,5 @@
 <template>
+  <Hero />
   <div class="relative min-h-screen">
     <div class="flex flex-col items-center justify-center min-h-screen p-6">
       <div
@@ -6,7 +7,7 @@
         style="max-width: 1200px;"
       >
       <div class="col-span-1">
-    <Sidebar />
+    <Filter />
   </div>
 
       <div class="col-span-2 col-start-2 col-end-4">

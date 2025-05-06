@@ -44,9 +44,10 @@
 
         <!-- Mobilmenyknapp -->
         <div class="md:hidden">
-          <DisclosureButton class="inline-flex items-center justify-center p-2 text-gray-600 hover:text-white hover:bg-gray-700 rounded-md focus:outline-none">
+          <DisclosureButton class="inline-flex items-center justify-center p-2 text-gray-600 hover:text-white hover:bg-gray-700 rounded-md">
             <Bars3Icon v-if="!open" class="h-6 w-6" aria-hidden="true" />
             <XMarkIcon v-else class="h-6 w-6" aria-hidden="true" />
+            <span class="sr-only">Meny</span>
           </DisclosureButton>
         </div>
       </div>
