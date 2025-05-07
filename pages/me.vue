@@ -31,7 +31,7 @@
         {{ a.title }}
       </a>
       <p class="text-sm text-gray-500">
-        Källa: {{ a.source || 'Okänd' }}
+      {{ a.source || 'Okänd' }}
       </p>
     </div>
 
@@ -69,7 +69,7 @@
         {{ t.title }}
       </a>
       <p class="text-sm text-gray-500">
-        Källa: {{ t.source }}
+      {{ t.source }}
       </p>
     </div>
 

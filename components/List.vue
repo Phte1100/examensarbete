@@ -1,5 +1,11 @@
 <template>
-  <div v-if="sortedArticles.length" class="mt-8 space-y-6">
+  <!-- Visa skeletons om loading -->
+<div v-if="loading" class="mt-8 space-y-6">
+  <SkeletonCard v-for="n in 5" :key="n" />
+</div>
+
+<!-- Visa riktiga artiklar -->
+<div v-else-if="sortedArticles.length" class="mt-8 space-y-6">
     <div
       v-for="(article, index) in paginatedArticles"
       :key="index"
@@ -21,10 +27,19 @@
         </span>
 
         <!-- Titel och info -->
-        <h2 class="text-xl font-bold text-gray-800 mb-1">{{ article.title }}</h2>
+        <h2 class="text-xl font-bold text-gray-800 mb-1">
+  <NuxtLink
+    :to="`/singel?url=${encodeURIComponent(article.url)}`"
+    class="hover:underline hover:text-indigo-600"
+  >
+    {{ article.title }} <span aria-hidden="true">&rarr;</span>
+  </NuxtLink>
+</h2>
+
         <p class="text-sm text-gray-500 mb-2">
           {{ article.author || article.byline }} –
-          {{ article.published_at?.substring(0, 20) || article.published_date?.substring(0, 20) }}
+          {{ new Date(article.published_at || article.published_date).toLocaleDateString() }}
+
         </p>
         <p class="text-gray-700 mb-2">{{ article.description || article.abstract }}</p>
 
@@ -38,13 +53,6 @@
           />
 
           <BookmarkButton v-if="user" :article="article" />
-
-          <NuxtLink
-            :to="`/singel?url=${encodeURIComponent(article.url)}`"
-            class="text-sm font-semibold text-gray-900"
-          >
-            Läs mer <span aria-hidden="true">&rarr;</span>
-          </NuxtLink>
         </div>
       </div>
     </div>
@@ -72,6 +80,8 @@ const currentPage = ref(1)
 const perPage = 5
 const supabase = useSupabaseClient()
 const user = useSupabaseUser()
+const loading = ref(true)
+
 
 // Globalt filter-state
 const selectedSources = useState('selectedSources', () => ['wired', 'the-verge', 'techradar', 'nyt'])
@@ -81,7 +91,13 @@ const sourceMap = {
   wired: 'wired',
   'the-verge': 'the verge',
   techradar: 'techradar',
-  nyt: 'new york times'
+  nyt: 'new york times',
+  'ars-technica': 'ars technica',
+  techcrunch: 'techcrunch',
+  recode: 'recode',
+  'the-next-web': 'the next web',
+  'hacker-news': 'hacker news',
+  mashable: 'mashable'
 }
 
 
@@ -116,6 +132,7 @@ const fetchArticles = async () => {
     })
 
     articles.value = enriched
+    loading.value = false
   } catch (err) {
     console.error('Kunde inte hämta artiklar eller likes:', err)
   }
@@ -130,8 +147,13 @@ const filteredArticles = computed(() => {
     const normalizedSource = rawSource.includes('techradar') ? 'techradar'
                           : rawSource.includes('techcrunch') ? 'techcrunch'
                           : rawSource.includes('the verge') ? 'the-verge'
-                          : rawSource.includes('new york times') ? 'nyt'
+                          : rawSource.includes('the new york times') ? 'nyt'
                           : rawSource.includes('wired') ? 'wired'
+                          : rawSource.includes('ars technica') ? 'ars-technica'
+                          : rawSource.includes('recode') ? 'recode'
+                          : rawSource.includes('the next web') ? 'the-next-web'
+                          : rawSource.includes('hacker news') ? 'hacker-news'
+                          : rawSource.includes('mashable') ? 'mashable'
                           : null
 
     return normalizedSource && selectedSources.value.includes(normalizedSource)

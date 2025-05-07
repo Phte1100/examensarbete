@@ -73,14 +73,15 @@ const handleBookmark = async () => {
     }
   } else {
     //Spara nytt bokmärke
-    const { title, url, img_url, url_to_image, published_at, published_date } = props.article
+    const { title, url, img_url, url_to_image, published_at, published_date, source_name, source } = props.article
 
     const { data, error } = await supabase.from('saved_articles').insert([{
       user_id: user.value.id,
       title,
       url,
       img_url: img_url || url_to_image,
-      published_at: published_at || published_date
+      published_at: published_at || published_date,
+      source: source_name || source || 'Unknown'
     }]).select().single()
 
     if (error) {

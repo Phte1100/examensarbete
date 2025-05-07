@@ -108,3 +108,4 @@ hacker news
 https://hn.algolia.com/api/v1/search?query=nuxt
 
 
+google: 481724641563-8k06j05gcj2qed5ab49q18q6h3j76phd.apps.googleusercontent.com

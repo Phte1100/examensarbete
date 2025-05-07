@@ -13,7 +13,7 @@
   
       <p class="text-sm text-gray-500 mb-2">
         {{ article.author || article.byline }} –
-        {{ article.published_at?.substring(0, 20) || article.published_date?.substring(0, 20) }}
+        {{ new Date(article.published_at || article.published_date).toLocaleDateString() }}
       </p>
   
   
