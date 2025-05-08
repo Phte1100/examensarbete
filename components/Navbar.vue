@@ -42,7 +42,7 @@
           </template>
   
           <!-- Mobilmenyknapp -->
-          <DisclosureButton class="md:hidden inline-flex items-center justify-center p-2 text-gray-300 hover:text-black hover:bg-gray-800 rounded-md">
+          <DisclosureButton class="md:hidden inline-flex items-center justify-center p-2 text-black-300 hover:text-black hover:bg-gray-800 rounded-md">
             <Bars3Icon v-if="!open" class="h-6 w-6" />
             <XMarkIcon v-else class="h-6 w-6" />
             <span class="sr-only">Öppna meny</span>
@@ -51,7 +51,7 @@
       </div>
   
       <!-- Mobilmeny -->
-      <DisclosurePanel class="md:hidden border-t border-gray-800 bg-gray-900 text-black px-4 pb-4 space-y-3">
+      <DisclosurePanel class="md:hidden border-t border-gray-800 bg-white-900 text-black px-4 pb-4 space-y-3">
         <form @submit.prevent="goToSearch" class="relative mt-3">
           <span class="absolute inset-y-0 left-0 flex items-center pl-3">
             <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">

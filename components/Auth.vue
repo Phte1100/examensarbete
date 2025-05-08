@@ -66,7 +66,7 @@ const loginWithGoogle = async () => {
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm space-y-6">
       <!-- Sektion: E-post och pinkod -->
       <div>
-        <h3 class="text-sm font-medium text-gray-700 mb-2">Logga in med e-post och pinkod</h3>
+        <h3 class="text-lg font-medium text-gray-700 mb-2">Logga in med e-post och pinkod</h3>
         <form @submit.prevent="step === 'enter-email' ? requestOtp() : verifyOtp()" class="space-y-4">
           <!-- E-post -->
           <div v-if="step === 'enter-email'">
@@ -118,14 +118,14 @@ const loginWithGoogle = async () => {
         <div class="absolute inset-0 flex items-center">
           <div class="w-full border-t border-gray-300"></div>
         </div>
-        <div class="relative flex justify-center text-sm">
-          <span class="bg-white px-2 text-gray-500">eller</span>
+        <div class="relative flex justify-center text-base">
+          <span class="px-2 text-white-500">eller</span>
         </div>
       </div>
 
       <!-- Google-knapp -->
       <div>
-        <h3 class="text-sm font-medium text-gray-700 mb-2">Logga in med Google</h3>
+        <h3 class="text-lg font-medium text-gray-700 mb-2">Logga in med Google</h3>
         <button
           @click="loginWithGoogle"
           type="button"
