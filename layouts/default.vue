@@ -6,12 +6,10 @@
 </Head>
 
     <!-- Innehåll -->
-    <div class="relative z-10 bg-regal-purple">
+
       <Navbar />
+      <main>
       <slot />
-    </div>
+    </main>
+    <Footer />
 </template>
-
-<script>
-
-</script>

@@ -3,9 +3,30 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
 body {
-    color: black;
-    background-color: #CFCEFF;
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  color: black;
+  background-color: #CFCEFF;
+}
+
+#__nuxt {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+main {
+  flex: 1;
 }
 
 /* Header */
