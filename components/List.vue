@@ -16,13 +16,14 @@
         <div v-if="article.img_url || article.url_to_image" class="mb-4">
           <img
             :src="article.img_url || article.url_to_image"
-            alt="Bild"
+            alt=""
+            role="presentation"
             class="rounded-xl w-full object-cover max-h-60"
           />
         </div>
 
         <!-- Källa -->
-        <span class="text-xs bg-gray-800 text-white px-2 py-1 rounded-full mb-2 inline-block">
+        <span class="text-base bg-gray-800 text-white px-2 py-1 rounded-full mb-2 inline-block">
           {{ article.source_name || article.source || 'New York Times' }}
         </span>
 

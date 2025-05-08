@@ -1,7 +1,7 @@
 <template>
   <div class="px-4 sm:px-6 lg:px-8 mt-8">
     <section
-      class="relative bg-cover bg-center text-white py-20 flex items-center justify-center min-h-[300px] rounded-3xl overflow-hidden"
+      class="relative bg-cover bg-center text-black py-20 flex items-center justify-center min-h-[300px] rounded-3xl overflow-hidden"
       style="background-image: url('/img/hero4.webp');"
     >
       <div class="relative z-10 text-center max-w-2xl px-4">

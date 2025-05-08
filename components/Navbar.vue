@@ -14,7 +14,9 @@
                 <path d="M21 21l-4.35-4.35M11 18a7 7 0 100-14 7 7 0 000 14z" />
               </svg>
             </span>
+            <label for="search" class="sr-only">Sök</label>
             <input
+            id="search"
               v-model="query"
               type="text"
               placeholder="Sök..."
@@ -23,7 +25,6 @@
           </form>
   
           <!-- Länkar -->
-          <NuxtLink to="/" class="text-lg hover:underline">Hem</NuxtLink>
           <NuxtLink to="/me" class="text-lg hover:underline">Mina sidor</NuxtLink>
           <NuxtLink to="/404" class="text-lg hover:underline">Om sidan</NuxtLink>
         </div>
@@ -66,7 +67,6 @@
           />
         </form>
   
-        <NuxtLink to="/" class="block text-sm hover:underline">Hem</NuxtLink>
         <NuxtLink to="/me" class="block text-sm hover:underline">Mina sidor</NuxtLink>
         <NuxtLink to="/404" class="block text-sm hover:underline">Om sidan</NuxtLink>
       </DisclosurePanel>

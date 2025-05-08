@@ -20,7 +20,7 @@
     class="flex justify-between items-center py-4"
   >
     <div>
-      <p class="text-sm text-gray-500">
+      <p class="text-sm text-black-500">
         {{ a.published_at?.substring(0, 10) }}
       </p>
       <a
@@ -30,14 +30,14 @@
       >
         {{ a.title }}
       </a>
-      <p class="text-sm text-gray-500">
+      <p class="text-sm text-black-500">
       {{ a.source || 'Okänd' }}
       </p>
     </div>
 
     <button
       @click="deleteArticle(a.id)"
-      class="material-symbols-outlined text-gray-500 hover:text-red-600 transition"
+      class="material-symbols-outlined text-black-500 hover:text-red-600 transition"
       title="Ta bort"
     >
       delete
@@ -58,7 +58,7 @@
     class="flex justify-between items-center py-4"
   >
     <div>
-      <p class="text-sm text-gray-500">
+      <p class="text-sm text-black-500">
         {{ t.created_at?.substring(0, 10) }}
       </p>
       <a
@@ -68,14 +68,14 @@
       >
         {{ t.title }}
       </a>
-      <p class="text-sm text-gray-500">
+      <p class="text-sm text-black-500">
       {{ t.source }}
       </p>
     </div>
 
     <button
       @click="deleteThread(t.id)"
-      class="material-symbols-outlined text-gray-500 hover:text-red-600 transition"
+      class="material-symbols-outlined text-black-500 hover:text-red-600 transition"
       title="Ta bort"
     >
       delete

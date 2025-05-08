@@ -11,18 +11,18 @@
       :key="index"
       class="p-2 border-b"
     >
-      <p class="text-sm text-gray-500">
-        {{ item.published_at?.slice(0, 10) }} - {{ item.source || 'Okänd' }}
+      <p class="text-sm text-black-500">
+        {{ item.published_at?.slice(0, 10) }} - {{ item.source_name || item.source }}
       </p>
       <NuxtLink
         :to="`/singel?url=${encodeURIComponent(item.url)}`"
-        class="font-medium text-gray-800 hover:underline block"
+        class="font-medium text-black-800 hover:underline block"
       >
         {{ item.title }}
       </NuxtLink>
     </div>
   </div>
-  <p v-else class="text-sm text-gray-400 text-center">Inga nyheter</p>
+  <p v-else class="text-sm text-black-400 text-center">Inga nyheter</p>
 </div>
 
   <!-- Stack Overflow -->
@@ -35,20 +35,20 @@
       class="p-2 border-b flex justify-between items-start"
     >
       <div>
-        <a :href="item.link" target="_blank" class="text-blue-600 hover:underline">
+        <a :href="item.link" target="_blank" class="hover:underline" style="color: #333366">
           {{ item.title }}
         </a>
       </div>
       <button
         @click="handleSaveThread({ ...item, url: item.link, source: 'Stack Overflow' })"
-        class="material-symbols-outlined text-gray-500 hover:text-green-600 ml-2"
+        class="material-symbols-outlined text-black-500 hover:text-green-600 ml-2"
         title="Spara tråd"
       >
         add
       </button>
     </div>
   </div>
-  <p v-else class="text-sm text-gray-400 text-center">Inga träffar</p>
+  <p v-else class="text-sm text-black-400 text-center">Inga träffar</p>
 </div>
 
 <!-- Hacker News -->
@@ -61,20 +61,20 @@
       class="p-2 border-b flex justify-between items-start"
     >
       <div>
-        <a :href="item.link" target="_blank" class="text-orange-600 hover:underline">
+        <a :href="item.link" target="_blank" class="hover:underline" style="color: #00473C">
           {{ item.title }}
         </a>
       </div>
       <button
         @click="handleSaveThread({ ...item, url: item.link, source: 'Hacker News' })"
-        class="material-symbols-outlined text-gray-500 hover:text-green-600 ml-2"
+        class="material-symbols-outlined text-black-500 hover:text-green-600 ml-2"
         title="Spara tråd"
       >
         add
       </button>
     </div>
   </div>
-  <p v-else class="text-sm text-gray-400 text-center">Inga träffar</p>
+  <p v-else class="text-sm text-black-400 text-center">Inga träffar</p>
 </div>
 
 <!-- Dev.to -->
@@ -87,20 +87,20 @@
       class="p-2 border-b flex justify-between items-start"
     >
       <div>
-        <a :href="item.url" target="_blank" class="text-indigo-600 hover:underline">
+        <a :href="item.url" target="_blank" class="hover:underline" style="color: #333366">
           {{ item.title }}
         </a>
       </div>
       <button
         @click="handleSaveThread({ ...item, source: 'Dev.to' })"
-        class="material-symbols-outlined text-gray-500 hover:text-green-600 ml-2"
+        class="material-symbols-outlined text-black-500 hover:text-green-600 ml-2"
         title="Spara tråd"
       >
         add
       </button>
     </div>
   </div>
-  <p v-else class="text-sm text-gray-400 text-center">Inga träffar</p>
+  <p v-else class="text-sm text-black-400 text-center">Inga träffar</p>
 </div>
   
         </div>
