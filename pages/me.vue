@@ -7,7 +7,7 @@
         <h2 class="text-xl font-semibold mb-2">Profil</h2>
         <p><strong>Användarnamn:</strong> {{ profile?.username }}</p>
 <p><strong>Fullständigt namn:</strong> {{ profile?.full_name }}</p>
-
+<Account />
       </section>
   
       <!-- Sparade artiklar -->
