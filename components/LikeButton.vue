@@ -19,6 +19,7 @@
   import { ref, watchEffect } from 'vue'
   import { useSupabaseClient, useSupabaseUser } from '#imports'
   
+  /// Props
   const props = defineProps({
     articleId: { type: Number, required: true },
     initialLikes: { type: Number, default: 0 },
@@ -32,6 +33,7 @@
   const liked = ref(props.initialUserLiked)
   const loading = ref(false)
   
+  // Kolla om användaren redan har gillat artikeln
   const toggleLike = async () => {
     if (!user.value) {
       alert('Du måste vara inloggad för att gilla.')

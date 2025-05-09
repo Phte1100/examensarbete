@@ -33,9 +33,11 @@ const isBookmarked = ref(false)
 const savedId = ref(null)
 const loading = ref(false)
 
+
 onMounted(async () => {
   if (!user.value) return
 
+  // Kolla om artikeln redan är bokmärkt
   const { data, error } = await supabase
     .from('saved_articles')
     .select('id')
@@ -49,6 +51,7 @@ onMounted(async () => {
   }
 })
 
+// Hantera bokmärkning
 const handleBookmark = async () => {
   if (!user.value) {
     alert('Du måste vara inloggad för att spara artiklar.')

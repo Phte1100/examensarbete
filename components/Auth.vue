@@ -7,6 +7,7 @@ const step = ref('enter-email')
 const code = ref('')
 const message = ref('')
 
+// kontrollera om användaren är inloggad
 async function requestOtp() {
   loading.value = true
   const { error } = await supabase.auth.signInWithOtp({
@@ -23,6 +24,7 @@ async function requestOtp() {
   loading.value = false
 }
 
+// verifiera pinkoden
 async function verifyOtp() {
   loading.value = true
   const { error } = await supabase.auth.verifyOtp({
@@ -40,6 +42,7 @@ async function verifyOtp() {
   loading.value = false
 }
 
+// logga in med Google
 const loginWithGoogle = async () => {
   loading.value = true
   const { error } = await supabase.auth.signInWithOAuth({
