@@ -82,19 +82,5 @@ const fetchLatestThreads = async () => {
 }
 
 onMounted(fetchLatestThreads)
-
-const handleClick = async () => {
-  try {
-    const response = await $fetch('/api/news/fetch', { method: 'POST' })
-    if (response.success) {
-      alert(`Hämtade och sparade ${response.inserted} artiklar till Supabase!`)
-    } else {
-      alert('Något gick fel.')
-    }
-  } catch (err) {
-    console.error(err)
-    alert('Fel vid API-anropet.')
-  }
-}
 </script>
 

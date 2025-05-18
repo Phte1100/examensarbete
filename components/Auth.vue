@@ -59,91 +59,57 @@ const loginWithGoogle = async () => {
 </script>
 
 <template>
-  <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
-    <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-      <h2 class="mt-10 text-center text-2xl font-bold tracking-tight text-gray-900">
-        Logga in på Learnit
-      </h2>
-    </div>
+  <div class="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 px-4">
+    <div class="bg-white shadow-lg rounded-2xl p-8 w-full max-w-md space-y-6">
+      <h2 class="text-2xl font-bold text-center text-gray-800">Logga in på Learnit</h2>
 
-    <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm space-y-6">
-      <!-- Sektion: E-post och pinkod -->
-      <div>
-        <h3 class="text-lg font-medium text-gray-700 mb-2">Logga in med e-post och pinkod</h3>
-        <form @submit.prevent="step === 'enter-email' ? requestOtp() : verifyOtp()" class="space-y-4">
-          <!-- E-post -->
-          <div v-if="step === 'enter-email'">
-            <label for="email" class="block text-sm font-medium text-gray-900">E-postadress</label>
-            <div class="mt-1">
-              <input
-                v-model="email"
-                id="email"
-                name="email"
-                type="email"
-                required
-                autocomplete="email"
-                placeholder="din@epost.se"
-                class="block w-full rounded-md bg-white px-3 py-2 text-sm text-gray-900 border border-gray-300 placeholder:text-gray-400 focus:ring-indigo-500 focus:border-indigo-500"
-              />
-            </div>
-          </div>
-
-          <!-- Pinkod -->
-          <div v-else>
-            <label for="code" class="block text-sm font-medium text-gray-900">Pinkod</label>
-            <div class="mt-1">
-              <input
-                v-model="code"
-                id="code"
-                name="code"
-                type="text"
-                maxlength="6"
-                required
-                placeholder="Ange pinkoden"
-                class="block w-full rounded-md bg-white px-3 py-2 text-sm text-gray-900 border border-gray-300 placeholder:text-gray-400 focus:ring-indigo-500 focus:border-indigo-500"
-              />
-            </div>
-          </div>
-
-          <!-- Skicka/logga in-knapp -->
-          <button
-            type="submit"
-            :disabled="loading"
-            class="w-full flex justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white hover:bg-indigo-500 focus:ring-2 focus:ring-indigo-500 disabled:opacity-50"
-          >
-            {{ loading ? 'Laddar...' : step === 'enter-email' ? 'Skicka kod' : 'Logga in' }}
-          </button>
-        </form>
-      </div>
-
-      <!-- Separator -->
-      <div class="relative">
-        <div class="absolute inset-0 flex items-center">
-          <div class="w-full border-t border-gray-300"></div>
+      <form @submit.prevent="step === 'enter-email' ? requestOtp() : verifyOtp()" class="space-y-4">
+        <div v-if="step === 'enter-email'">
+          <label class="block text-sm font-medium text-gray-700">E-postadress</label>
+          <input
+            v-model="email"
+            type="email"
+            placeholder="din@epost.se"
+            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+            required
+          />
         </div>
-        <div class="relative flex justify-center text-base">
-          <span class="px-2 text-white-500">eller</span>
-        </div>
-      </div>
 
-      <!-- Google-knapp -->
-      <div>
-        <h3 class="text-lg font-medium text-gray-700 mb-2">Logga in med Google</h3>
+        <div v-else>
+          <label class="block text-sm font-medium text-gray-700">Pinkod</label>
+          <input
+            v-model="code"
+            type="text"
+            maxlength="6"
+            placeholder="Ange pinkoden"
+            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+            required
+          />
+        </div>
+
         <button
-          @click="loginWithGoogle"
-          type="button"
-          class="flex w-full justify-center items-center gap-2 rounded-md bg-white border border-gray-300 px-4 py-2 text-sm font-semibold text-gray-700 shadow-sm hover:bg-gray-50"
+          type="submit"
           :disabled="loading"
+          class="w-full bg-gradient-to-r from-cyan-400 to-purple-500 text-white py-2 rounded-md font-semibold hover:opacity-90 disabled:opacity-50 transition"
         >
-          <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" class="w-5 h-5" />
-          Logga in med Google
+          {{ loading ? 'Laddar...' : step === 'enter-email' ? 'Skicka kod' : 'Logga in' }}
         </button>
-      </div>
+      </form>
 
-      <!-- Meddelande -->
-      <p v-if="message" class="text-center text-sm text-gray-600">
-        {{ message }}
-      </p>
+      <div class="text-center text-gray-500">eller</div>
+
+      <button
+        @click="loginWithGoogle"
+        type="button"
+        :disabled="loading"
+        class="w-full flex items-center justify-center gap-2 border border-gray-300 rounded-md py-2 text-sm text-gray-700 hover:bg-gray-50 transition"
+      >
+        <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" class="w-5 h-5" />
+        Logga in med Google
+      </button>
+
+      <p v-if="message" class="text-center text-sm text-gray-600">{{ message }}</p>
     </div>
   </div>
 </template>
+
