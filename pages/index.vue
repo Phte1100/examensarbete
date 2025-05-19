@@ -1,7 +1,7 @@
 <template>
   <Hero />
   <div class="relative min-h-screen">
-    <div class="flex flex-col items-center justify-center p-6">
+    <div class="flex flex-col items-center justify-center min-h-screen p-6">
       <div
         class="mt-6 space-y-12 lg:grid lg:grid-cols-4 lg:gap-x-3 lg:space-y-0"
         style="max-width: 1200px;"
