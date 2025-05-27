@@ -11,14 +11,12 @@ const user = useSupabaseUser()
 
 const { data } = await supabase
   .from('profiles')
-  .select(`username, website, avatar_url`)
+  .select(`username`)
   .eq('id', user.value.id)
   .single()
 
 if (data) {
   username.value = data.username
-  website.value = data.website
-  avatar_path.value = data.avatar_url
 }
 
 loading.value = false
@@ -31,8 +29,6 @@ async function updateProfile() {
     const updates = {
       id: user.value.id,
       username: username.value,
-      website: website.value,
-      avatar_url: avatar_path.value,
       updated_at: new Date(),
     }
 
@@ -62,32 +58,58 @@ async function signOut() {
 </script>
 
 <template>
-  <form class="form-widget" @submit.prevent="updateProfile">
+  <form class="form-widget max-w-md mx-auto p-6 bg-white rounded shadow" @submit.prevent="updateProfile">
     <Avatar v-model:path="avatar_path" @upload="updateProfile" />
-    <div>
-      <label for="email">Email</label>
-      <input id="email" type="text" :value="user.email" disabled />
-    </div>
-    <div>
-      <label for="username">Name</label>
-      <input id="username" type="text" v-model="username" />
-    </div>
-    <div>
-      <label for="website">Website</label>
-      <input id="website" type="url" v-model="website" />
-    </div>
 
-    <div>
+    <div class="mb-4">
+      <label for="email" class="block text-sm font-medium text-gray-700">E-post:</label>
       <input
-        type="submit"
-        class="button primary block"
-        :value="loading ? 'Loading ...' : 'Update'"
-        :disabled="loading"
+        id="email"
+        type="text"
+        :value="user.email"
+        disabled
+        class="mt-1 block w-full rounded border border-gray-300 px-3 py-2 bg-gray-100 text-gray-700"
       />
     </div>
 
-    <div>
-      <button class="button block" @click="signOut" :disabled="loading">Sign Out</button>
+    <div class="mb-4">
+      <label for="username" class="block text-sm font-medium text-gray-700">Användarnamn:</label>
+      <input
+        id="username"
+        type="text"
+        v-model="username"
+        class="mt-1 block w-full rounded border border-gray-300 px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500"
+      />
+    </div>
+
+    <div class="mb-4">
+      <label for="website" class="block text-sm font-medium text-gray-700">Webbplats:</label>
+      <input
+        id="website"
+        type="url"
+        v-model="website"
+        class="mt-1 block w-full rounded border border-gray-300 px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500"
+      />
+    </div>
+
+    <div class="mt-6">
+      <input
+        type="submit"
+        :value="loading ? 'Laddar...' : 'Uppdatera'"
+        :disabled="loading"
+        class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded transition disabled:opacity-50"
+      />
+    </div>
+
+    <div class="mt-4">
+      <button
+        @click="signOut"
+        type="button"
+        :disabled="loading"
+        class="w-full bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded transition disabled:opacity-50"
+      >
+        Logga ut
+      </button>
     </div>
   </form>
 </template>
