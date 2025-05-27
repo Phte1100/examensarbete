@@ -58,41 +58,19 @@ async function signOut() {
 </script>
 
 <template>
-  <form class="form-widget max-w-md mx-auto p-6 bg-white rounded shadow" @submit.prevent="updateProfile">
+  <form class="form-widget" @submit.prevent="updateProfile">
     <Avatar v-model:path="avatar_path" @upload="updateProfile" />
-
-    <div class="mb-4">
-      <label for="email" class="block text-sm font-medium text-gray-700">E-post:</label>
-      <input
-        id="email"
-        type="text"
-        :value="user.email"
-        disabled
-        class="mt-1 block w-full rounded border border-gray-300 px-3 py-2 bg-gray-100 text-gray-700"
-      />
+    <div>
+      <label for="email">E-post:</label><br>
+      <input id="email" type="text" :value="user.email" disabled />
+    </div>
+    <div>
+      <label for="username">Användarnamn:</label><br>
+      <input id="username" type="text" v-model="username" />
     </div>
 
-    <div class="mb-4">
-      <label for="username" class="block text-sm font-medium text-gray-700">Användarnamn:</label>
-      <input
-        id="username"
-        type="text"
-        v-model="username"
-        class="mt-1 block w-full rounded border border-gray-300 px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500"
-      />
-    </div>
 
-    <div class="mb-4">
-      <label for="website" class="block text-sm font-medium text-gray-700">Webbplats:</label>
-      <input
-        id="website"
-        type="url"
-        v-model="website"
-        class="mt-1 block w-full rounded border border-gray-300 px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500"
-      />
-    </div>
-
-    <div class="mt-6">
+<div class="mt-6">
       <input
         type="submit"
         :value="loading ? 'Laddar...' : 'Uppdatera'"
