@@ -6,6 +6,8 @@ const username = ref('')
 const successMessage = ref('')
 const user = useSupabaseUser()
 
+const emit = defineEmits(['updated'])
+
 // Hämta befintligt användarnamn
 const fetchProfile = async () => {
   loading.value = true
@@ -39,11 +41,10 @@ async function updateProfile() {
 
     if (error) throw error
 
-    // Bekräftelse
     successMessage.value = 'Profilen har uppdaterats!'
-    setTimeout(() => (successMessage.value = ''), 3000)
+    emit('updated') // Skicka signal till förälder
 
-    await fetchProfile() // uppdaterar fältet direkt
+    setTimeout(() => (successMessage.value = ''), 3000)
   } catch (error) {
     alert(error.message)
   } finally {
@@ -53,26 +54,14 @@ async function updateProfile() {
 </script>
 
 <template>
-  <form class="form-widget max-w-md mx-auto p-4 space-y-4 bg-white rounded shadow" @submit.prevent="updateProfile">
+  <form class="form-widget" @submit.prevent="updateProfile">
     <div>
-      <label for="email" class="block font-medium text-sm text-gray-700">E-post:</label>
-      <input
-        id="email"
-        type="text"
-        :value="user.email"
-        disabled
-        class="mt-1 block w-full rounded border border-gray-300 px-3 py-2 bg-gray-100 text-gray-700"
-      />
+      <label for="email">E-post:</label><br>
+      <input id="email" type="text" :value="user.email" disabled />
     </div>
-
     <div>
-      <label for="username" class="block font-medium text-sm text-gray-700">Användarnamn:</label>
-      <input
-        id="username"
-        type="text"
-        v-model="username"
-        class="mt-1 block w-full rounded border border-gray-300 px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500"
-      />
+      <label for="username">Användarnamn:</label><br>
+      <input id="username" type="text" v-model="username" />
     </div>
 
     <div class="mt-4">
