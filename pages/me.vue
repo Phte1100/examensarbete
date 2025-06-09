@@ -6,7 +6,7 @@ const profile = ref(null)
 const articles = ref([])
 const threads = ref([])
 
-// 🔁 Funktion som kan anropas flera gånger
+// Funktion som kan anropas flera gånger
 const fetchProfile = async () => {
   const { data: p, error: profileError } = await supabase
     .from('profiles')

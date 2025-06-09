@@ -1,111 +1,51 @@
-# Nuxt Minimal Starter
+# Learnit – En kunskapsplattform för utvecklare
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Learnit är en webbaserad plattform som samlar tekniknyheter och foruminlägg från flera källor till en enda plats. Målet är att förenkla vardagen för utvecklare och teknikintresserade genom att erbjuda ett personligt, filtrerbart och interaktivt gränssnitt.
 
-## Setup
+## Funktioner
 
-Make sure to install dependencies:
+- Sök innehåll från Stack Overflow, Hacker News, Dev.to, NewsAPI och New York Times
+- OTP-inloggning (pinkod via mejl) och Google-inloggning via Supabase
+- Gilla och spara artiklar och trådar
+- Personlig profilsida där användaren ser sparade inlägg
+- Responsivt gränssnitt – fungerar på både desktop och mobil
+- Automatiskt hämtning av nyheter via cron jobs och edge functions
+
+## Tekniker
+
+- Nuxt 3 (Vue 3)
+- Supabase (PostgreSQL, Auth, Edge Functions, Storage)
+- Tailwind CSS
+- TypeScript
+- Lighthouse / Wave för test och tillgänglighetsanalys
+
+## Installation
 
 ```bash
-# npm
+git clone https://github.com/Phte1100/examensarbete
+cd learnit
 npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
 npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
 ```
 
-## Production
+## API-routes
 
-Build the application for production:
+Projektet har egna API-routes i `/server/api` som fungerar som mellanlager mot Supabase och externa källor. Exempel:
 
-```bash
-# npm
-npm run build
+| Route                  | Metod | Syfte                               |
+|------------------------|-------|-------------------------------------|
+| /api/likes/toggle      | POST  | Gilla/ogilla artikel                |
+| /api/news/list         | GET   | Hämta nyheter från NewsAPI-tabellen |
+| /api/news/list2        | GET   | Hämta artiklar från New York Times  |
+| /api/search/fetch      | POST  | Hämta trådar från tre forumkällor   |
 
-# pnpm
-pnpm build
+## Prestanda
 
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+- Lighthouse Score:
+  - **Performance:** 99
+  - **Accessibility:** 95
+  - **Best Practices:** 100
+  - **SEO:** 83
 
 
-SUPABASE_URL=https://gdfdjnnsdmhfobbuawgb.supabase.co
-SUPABASE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdkZmRqbm5zZG1oZm9iYnVhd2diIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDMzOTkwNDEsImV4cCI6MjA1ODk3NTA0MX0.PJUsGeT1EbA-oCIrPF-mynhVgECzVsCK_bxjEUz6TiA
-NEWS_API_KEY=ff98d142bb8949c6b5d3350e8babd8fa
-
-
-Supabase token för edge funktion
-
-name: test
-
-token: sbp_719bcd7ec8ba594f2cacd7c5e35928e9d1bb2872
-
-
-new york times api:
-
-https://api.nytimes.com/svc/topstories/v2/technology.json?api-key=3gySNnE3Ly9D2zD3DEC9GroOYifGli9A
-
-the guardian:
-ccf302db-c402-40ac-8162-958c48941261
-
-https://content.guardianapis.com/search?q=technology&section=technology&show-fields=all&order-by=newest&api-key=ccf302db-c402-40ac-8162-958c48941261
-
-
-dev.to
-https://developers.forem.com/api/
-
-https://dev.to/api/articles?tag=javascript
-
-
-hacker news
-
-https://hn.algolia.com/api/v1/search?query=nuxt
-
-
-google: 481724641563-8k06j05gcj2qed5ab49q18q6h3j76phd.apps.googleusercontent.com
+© 2025 Philip
